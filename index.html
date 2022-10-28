@@ -10,29 +10,32 @@
   <body>
     <div class="screen">
       <section class="game_area">
-        <div class="player active">
+        <div class="player active player1">
           <div class="status">
-            <h2 class="heading_secondry">Player 1</h2>
-            <p class="score activeScore">0</p>
+            <h2 class="heading_secondry" id="player1">Player 1</h2>
+            <p class="score activeScore" id="score1">0</p>
           </div>
           <div class="score_container activebox">
             <p class="text">Current</p>
-            <p class="current_score">0</p>
+            <p class="current_score" id="current1">0</p>
           </div>
         </div>
-        <div class="player">
+        <div class="player player2">
           <div class="status">
-            <h2 class="heading_secondry">Player 2</h2>
-            <p class="score">0</p>
+            <h2 class="heading_secondry" id="player2">Player 2</h2>
+            <p class="score" id="score2">0</p>
           </div>
           <div class="score_container">
             <p class="text">Current</p>
-            <p class="current_score">0</p>
+            <p class="current_score" id="current2">0</p>
           </div>
         </div>
-        <button class="btn newgame">🔁 NEW GAME</button>
-        <button class="btn diceroll">🎲 ROLL DICE</button>
-        <button class="btn hold">🚫 HOLD</button>
+        <div class="rest">
+          <button class="btn newgame">🔁 NEW GAME</button>
+          <img src="img/dice-1.png" alt="dice" class="dice hidden" id="dice" />
+          <button class="btn diceroll">🎲 ROLL DICE</button>
+          <button class="btn hold">🚫 HOLD</button>
+        </div>
       </section>
     </div>
   </body>
