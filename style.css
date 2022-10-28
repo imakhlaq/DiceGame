@@ -121,3 +121,11 @@ body {
   opacity: 0;
   pointer-events: none;
 }
+.losser {
+  background-color: #ac2d40;
+  border-radius: 1rem;
+}
+.winner {
+  background-color: #22c55e;
+  border-radius: 1rem;
+}

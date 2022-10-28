@@ -12,6 +12,8 @@ const player1El = document.getElementById("player1");
 const diceEl = document.getElementById("dice");
 //dice roll button
 const btnroll = document.querySelector(".diceroll");
+//hold button
+const btnhold = document.querySelector(".hold");
 
 //setting score
 score0El.textContent = 0;
@@ -68,6 +70,16 @@ const setFinalScore = function () {
     score1El.textContent = score[activeplayer];
   }
 };
+//checking for winner
+const checkWinner = function () {
+  if (activeplayer === 0 && score[activeplayer] >= 30) {
+    player0El.classList.add("winner");
+    player1El.classList.add("losser");
+  } else if (score[activeplayer] >= 30) {
+    player1El.classList.add("winner");
+    player0El.classList.add("losser");
+  }
+};
 //showing dice
 const btnrollclick = function () {
   let rollnum = genRandomNum();
@@ -81,10 +93,18 @@ const btnrollclick = function () {
     currentScore[activeplayer] += rollnum;
     setCorrentScore();
   } else {
-    resetCorrentScore();
     setFinalScore();
+    resetCorrentScore();
+    checkWinner();
     activeplayer = activeplayer === 0 ? 1 : 0;
     activeUI(activeplayer);
   }
 };
 btnroll.addEventListener("click", btnrollclick);
+//hold logic
+const btnholdclick=function(){
+    
+}
+
+// hold event listner
+btnhold.addEventListener("click", btnholdclick);
