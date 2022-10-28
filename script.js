@@ -1,21 +1,28 @@
 "use strict";
 //retriving score
+const score0El = document.getElementById("score0");
 const score1El = document.getElementById("score1");
-const score2El = document.getElementById("score2");
 //current score
+const current0El = document.getElementById("current0");
 const current1El = document.getElementById("current1");
-const current2El = document.getElementById("current2");
 //getting player active
+const player0El = document.getElementById("player0");
 const player1El = document.getElementById("player1");
-const player2El = document.getElementById("player2");
 //dice
 const diceEl = document.getElementById("dice");
 //dice roll button
 const btnroll = document.querySelector(".diceroll");
 
 //setting score
+score0El.textContent = 0;
 score1El.textContent = 0;
-score2El.textContent = 0;
+
+//players final score
+const score = [0, 0];
+//current playing
+let activeplayer = 0; //0 means 1st player 1 means 2nd player
+//players current score
+const currentScore = [0, 0];
 
 //function for random number
 
@@ -24,14 +31,43 @@ const genRandomNum = function () {
   return randomNum;
 };
 
-//players final score
-const score = [0, 0];
-//current playing
-const activeplayer = 0; //0 means 1st player 1 means 2nd player
-//players current score
-let currentscore1 = 0;
-let currentscore2 = 0;
-
+//changing playerUi
+const activeUI = function () {
+  if (activeplayer == 0) {
+    player0El.classList.add("active");
+    player1El.classList.remove("active");
+  } else {
+    player0El.classList.remove("active");
+    player1El.classList.add("active");
+  }
+};
+//for setting current score
+const setCorrentScore = function () {
+  if (activeplayer === 0) {
+    current0El.textContent = currentScore[activeplayer];
+  } else {
+    current1El.textContent = currentScore[activeplayer];
+  }
+};
+const resetCorrentScore = function () {
+  if (activeplayer === 0) {
+    currentScore[activeplayer] = 0;
+    current0El.textContent = currentScore[activeplayer];
+  } else {
+    currentScore[activeplayer] = 0;
+    current1El.textContent = currentScore[activeplayer];
+  }
+};
+//for setting final score
+const setFinalScore = function () {
+  if (activeplayer === 0) {
+    score[activeplayer] = currentScore[activeplayer];
+    score0El.textContent = score[activeplayer];
+  } else {
+    score[activeplayer] = currentScore[activeplayer];
+    score1El.textContent = score[activeplayer];
+  }
+};
 //showing dice
 const btnrollclick = function () {
   let rollnum = genRandomNum();
@@ -40,15 +76,15 @@ const btnrollclick = function () {
   //manupulating dice img
   diceEl.src = `img/dice-${rollnum}.png`;
   //making card active
-  player1El.classList.add("active");
-  if (rollnum !== 1 && finalscore1 <= 100) {
-    currentscore1 += rollnum;
-    current1El.textContent = currentscore1;
+  if (rollnum !== 1) {
+    activeUI(activeplayer);
+    currentScore[activeplayer] += rollnum;
+    setCorrentScore();
   } else {
-    current1El.textContent = 0;
-    finalscore1 = currentscore1;
-    score1El.textContent = finalscore1;
-    player1El.classList.remove("active");
+    resetCorrentScore();
+    setFinalScore();
+    activeplayer = activeplayer === 0 ? 1 : 0;
+    activeUI(activeplayer);
   }
 };
 btnroll.addEventListener("click", btnrollclick);
