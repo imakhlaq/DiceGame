@@ -83,12 +83,14 @@ const checkWinner = function () {
     player1El.classList.add("losser");
     status0[1].classList.add("losser");
     btnroll.disabled = true;
+    btnhold.disabled = true;
   } else if (activeplayer === 1 && score[activeplayer] >= 30) {
     player1El.classList.add("winner");
     status0[1].classList.add("winner");
     player0El.classList.add("losser");
     status0[0].classList.add("losser");
     btnroll.disabled = true;
+    btnhold.disabled = true;
   }
 };
 //reset final score
@@ -126,6 +128,7 @@ btnroll.addEventListener("click", btnrollclick);
 //hold logic
 const btnholdclick = function () {
   setFinalScore();
+  currentScore[activeplayer] = 0;
   checkWinner();
   activeplayer = activeplayer === 0 ? 1 : 0;
   activeUI(activeplayer);
@@ -163,6 +166,8 @@ const resetgame = function () {
 
   player0El.classList.remove("active");
   player1El.classList.remove("active");
+
+  btnhold.disabled = false;
 };
 
 //reset button
