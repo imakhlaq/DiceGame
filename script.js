@@ -160,6 +160,9 @@ const resetgame = function () {
     player0El.classList.remove("losser");
     status0[0].classList.remove("losser");
   }
+
+  player0El.classList.remove("active");
+  player1El.classList.remove("active");
 };
 
 //reset button
