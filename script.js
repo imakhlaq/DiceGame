@@ -147,7 +147,19 @@ const resetgame = function () {
   current1El.textContent = currentScore[1];
 
   diceEl.classList.add("hidden");
-  
+  btnroll.disabled = false;
+
+  if (player0El.classList.contains("winner")) {
+    player0El.classList.remove("winner");
+    status0[0].classList.remove("winner");
+    player1El.classList.remove("losser");
+    status0[1].classList.remove("losser");
+  } else if (player1El.classList.contains("winner")) {
+    player1El.classList.remove("winner");
+    status0[1].classList.remove("winner");
+    player0El.classList.remove("losser");
+    status0[0].classList.remove("losser");
+  }
 };
 
 //reset button
