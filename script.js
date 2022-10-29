@@ -138,8 +138,16 @@ btnhold.addEventListener("click", btnholdclick);
 const resetgame = function () {
   score[0] = 0;
   score[1] = 0;
-  currentScore[0] = [0];
-  currentScore[1] = [0];
+  currentScore[0] = 0;
+  currentScore[1] = 0;
+  activeplayer = 0;
+  score1El.textContent = currentScore[1];
+  score0El.textContent = currentScore[0];
+  current0El.textContent = currentScore[0];
+  current1El.textContent = currentScore[1];
+
+  diceEl.classList.add("hidden");
+  
 };
 
 //reset button
