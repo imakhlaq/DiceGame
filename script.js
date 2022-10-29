@@ -75,9 +75,11 @@ const checkWinner = function () {
   if (activeplayer === 0 && score[activeplayer] >= 30) {
     player0El.classList.add("winner");
     player1El.classList.add("losser");
+    btnroll.disabled = true;
   } else if (score[activeplayer] >= 30) {
     player1El.classList.add("winner");
     player0El.classList.add("losser");
+    btnroll.disabled = true;
   }
 };
 //showing dice
@@ -102,9 +104,12 @@ const btnrollclick = function () {
 };
 btnroll.addEventListener("click", btnrollclick);
 //hold logic
-const btnholdclick=function(){
-    
-}
+const btnholdclick = function () {
+  setFinalScore();
+  checkWinner();
+  activeplayer = activeplayer === 0 ? 1 : 0;
+  activeUI(activeplayer);
+};
 
 // hold event listner
 btnhold.addEventListener("click", btnholdclick);
