@@ -14,6 +14,11 @@ const diceEl = document.getElementById("dice");
 const btnroll = document.querySelector(".diceroll");
 //hold button
 const btnhold = document.querySelector(".hold");
+//score container
+const status0 = document.querySelectorAll(".score_container");
+
+//reset button
+const reset = document.getElementById("reset");
 
 //setting score
 score0El.textContent = 0;
@@ -74,12 +79,25 @@ const setFinalScore = function () {
 const checkWinner = function () {
   if (activeplayer === 0 && score[activeplayer] >= 30) {
     player0El.classList.add("winner");
+    status0[0].classList.add("winner");
     player1El.classList.add("losser");
+    status0[1].classList.add("losser");
     btnroll.disabled = true;
-  } else if (score[activeplayer] >= 30) {
+  } else if (activeplayer === 1 && score[activeplayer] >= 30) {
     player1El.classList.add("winner");
+    status0[1].classList.add("winner");
     player0El.classList.add("losser");
+    status0[0].classList.add("losser");
     btnroll.disabled = true;
+  }
+};
+//reset final score
+const resetFinalScore = function () {
+  score[activeplayer] = 0;
+  if (activeplayer) {
+    score1El.textContent = score[activeplayer];
+  } else {
+    score0El.textContent = score[activeplayer];
   }
 };
 //showing dice
@@ -94,8 +112,10 @@ const btnrollclick = function () {
     activeUI(activeplayer);
     currentScore[activeplayer] += rollnum;
     setCorrentScore();
-  } else {
     setFinalScore();
+    checkWinner();
+  } else {
+    resetFinalScore();
     resetCorrentScore();
     checkWinner();
     activeplayer = activeplayer === 0 ? 1 : 0;
@@ -113,3 +133,14 @@ const btnholdclick = function () {
 
 // hold event listner
 btnhold.addEventListener("click", btnholdclick);
+
+//reset logic
+const resetgame = function () {
+  score[0] = 0;
+  score[1] = 0;
+  currentScore[0] = [0];
+  currentScore[1] = [0];
+};
+
+//reset button
+reset.addEventListener("click", resetgame);
