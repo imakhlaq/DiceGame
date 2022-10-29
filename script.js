@@ -20,19 +20,52 @@ const status0 = document.querySelectorAll(".score_container");
 //reset button
 const reset = document.getElementById("reset");
 
-//setting score
-score0El.textContent = 0;
-score1El.textContent = 0;
-
 //players final score
-const score = [0, 0];
+let score;
 //current playing
-let activeplayer = 0; //0 means 1st player 1 means 2nd player
+let activeplayer; //0 means 1st player 1 means 2nd player
 //players current score
-const currentScore = [0, 0];
+let currentScore;
 
 //function for random number
 
+const init = function () {
+  //players final score
+  score = [0, 0];
+  //current playing
+  activeplayer = 0; //0 means 1st player 1 means 2nd player
+  //players current score
+  currentScore = [0, 0];
+
+  //setting score
+  score0El.textContent = 0;
+  score1El.textContent = 0;
+  //current score
+  current0El.textContent = 0;
+  current1El.textContent = 0;
+
+  activeplayer = 0;
+
+  diceEl.classList.add("hidden");
+
+  player0El.classList.add("active");
+
+  btnroll.disabled = false;
+  player0El.classList.remove("winner");
+  status0[0].classList.remove("winner");
+  player1El.classList.remove("losser");
+  status0[1].classList.remove("losser");
+  player1El.classList.remove("winner");
+  status0[1].classList.remove("winner");
+  player0El.classList.remove("losser");
+  status0[0].classList.remove("losser");
+
+  player0El.classList.remove("active");
+  player1El.classList.remove("active");
+
+  btnhold.disabled = false;
+};
+init();
 const genRandomNum = function () {
   const randomNum = Math.floor(Math.random() * 6 + 1);
   return randomNum;
@@ -137,38 +170,5 @@ const btnholdclick = function () {
 // hold event listner
 btnhold.addEventListener("click", btnholdclick);
 
-//reset logic
-const resetgame = function () {
-  score[0] = 0;
-  score[1] = 0;
-  currentScore[0] = 0;
-  currentScore[1] = 0;
-  activeplayer = 0;
-  score1El.textContent = currentScore[1];
-  score0El.textContent = currentScore[0];
-  current0El.textContent = currentScore[0];
-  current1El.textContent = currentScore[1];
-
-  diceEl.classList.add("hidden");
-  btnroll.disabled = false;
-
-  if (player0El.classList.contains("winner")) {
-    player0El.classList.remove("winner");
-    status0[0].classList.remove("winner");
-    player1El.classList.remove("losser");
-    status0[1].classList.remove("losser");
-  } else if (player1El.classList.contains("winner")) {
-    player1El.classList.remove("winner");
-    status0[1].classList.remove("winner");
-    player0El.classList.remove("losser");
-    status0[0].classList.remove("losser");
-  }
-
-  player0El.classList.remove("active");
-  player1El.classList.remove("active");
-
-  btnhold.disabled = false;
-};
-
 //reset button
-reset.addEventListener("click", resetgame);
+reset.addEventListener("click", init);
